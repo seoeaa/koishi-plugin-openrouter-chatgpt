@@ -44,7 +44,9 @@ export const Config: Schema<Config> = Schema.object({
   presencePenalty: Schema.number().default(0).description('Значение находится в диапазоне от -2,0 до 2,0. Положительные значения штрафуют новые токены на основе их существующей частоты в тексте, уменьшая вероятность того, что модель будет дословно повторять одну и ту же строку.'),
   stop: Schema.array(Schema.string()).default(null).description('Сгенерированный текст остановится при обнаружении любого маркера остановки.'),
   errorMessage: Schema.string().default("В ответе ошибка, свяжитесь с администратором.。").description("Подсказка при ответе на ошибку."),
-  pictureMode: Schema.boolean().default(false).description("Включите режим изображения.")
+  pictureMode: Schema.boolean().default(false).description("Включите режим изображения."),
+  defaultHeaders: {"HTTP-Referer": "https://github.com/seoeaa/koishi-plugin-openrouter-chatgpt",  "X-Title": "koishi-plugin",
+  },
 })
 
 export async function apply(ctx: Context, config: Config) {
@@ -84,12 +86,6 @@ export async function apply(ctx: Context, config: Config) {
     session.send("Запрос продолжается, пожалуйста, подождите...");
     try {
 
-      const headers = {
-        'Referer': 'Ваш HTTP-Referer',
-        'X-Title': 'Ваш X-Title',
-      };
-
-
       const completion = await openai.createChatCompletion({
         model: config.model,
         messages: [{ "role": "user", 'content': q }],
@@ -99,7 +95,7 @@ export async function apply(ctx: Context, config: Config) {
         frequency_penalty: config.frequencyPenalty,
         presence_penalty: config.presencePenalty,
         stop: config.stop,
-      }, { headers });
+      });
       return completion.data.choices[0].message.content;
     } catch (error) {
       if (error.response) {
