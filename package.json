@@ -1,0 +1,39 @@
+{
+  "name": "koishi-plugin-openarouter-chatgpt",
+  "author": "seoinetru",
+  "version": "1.0.1",
+  "description": "A ChatGPT robot that calls the official API and supports agents.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sky390/koishi-plugin-openai-chatgpt"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "license": "AGPL-3.0-only",
+  "scripts": {},
+  "keywords": [
+    "chatgpt",
+    "koishi",
+    "plugin",
+    "ai",
+    "generate"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.11.5",
+    "koishi-plugin-puppeteer": "^3.4.11"
+  },
+  "koishi": {
+    "browser": true,
+    "description": {
+      "en": "A ChatGPT robot that calls the official API and supports agents.",
+      "zh": "一个调用官方 API 的 ChatGPT 机器人，支持代理。"
+    }
+  },
+  "dependencies": {
+    "openai": "^3.2.1"
+  }
+}
