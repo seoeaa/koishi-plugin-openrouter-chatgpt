@@ -2,10 +2,10 @@
   "name": "koishi-plugin-openarouter-chatgpt",
   "author": "seoinetru",
   "version": "1.0.1",
-  "description": "A ChatGPT robot that calls the official API and supports agents.",
+  "description": "A ChatGPT robot that calls the API Openrouter and supports agents.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sky390/koishi-plugin-openai-chatgpt"
+    "url": "git+https://github.com/seoeaa/koishi-plugin-openrouter-chatgpt"
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -16,7 +16,7 @@
   "license": "AGPL-3.0-only",
   "scripts": {},
   "keywords": [
-    "chatgpt",
+    "openrouter",
     "koishi",
     "plugin",
     "ai",
@@ -29,11 +29,13 @@
   "koishi": {
     "browser": true,
     "description": {
-      "en": "A ChatGPT robot that calls the official API and supports agents.",
-      "zh": "一个调用官方 API 的 ChatGPT 机器人，支持代理。"
+      "en": "A ChatGPT robot that calls the API Openrouter and supports agents.",
+      "zh": "一个ChatGPT机器人，调用API Openrouter并支持代理。",
+      "ru": "Робот ChatGPT, который вызывает API Openrouter и поддерживает агентов."
     }
   },
   "dependencies": {
-    "openai": "^3.2.1"
+    "openai": "^3.2.1",
+    "axios": "^1.6.5"
   }
 }
