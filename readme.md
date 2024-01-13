@@ -1,4 +1,4 @@
-# koishi-plugin-openai-chatgpt
+# koishi-plugin-openrouter-chatgpt
 
 [![npm](https://img.shields.io/npm/v/koishi-plugin-openrouter-chatgpt?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-openrouter-chatgpt)
 
