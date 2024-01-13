@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-openrouter-chatgpt",
   "author": "seoinetru",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A ChatGPT robot that calls the API Openrouter and supports agents.",
   "repository": {
     "type": "git",
@@ -23,8 +23,8 @@
     "generate"
   ],
   "peerDependencies": {
-    "koishi": "^4.11.5",
-    "koishi-plugin-puppeteer": "^3.4.11"
+    "koishi": "^4.16.4",
+    "koishi-plugin-puppeteer": "^3.7.3"
   },
   "koishi": {
     "browser": true,
@@ -35,7 +35,7 @@
     }
   },
   "dependencies": {
-    "openai": "^3.2.1",
+    "openai": "^4.24.6",
     "axios": "^1.6.5"
   }
 }

@@ -32,15 +32,15 @@ async function getAvailableModels() {
   } catch (error) {
     console.error('Error fetching models:', error.message);
     // Возвращайте стандартные модели в случае ошибки
-    return ['gpt-3.5-turbo'];
+    return ['gpt-3.5-turbo', 'google/gemini-pro'];
   }
 }
 
 export const Config: Schema<Config> = Schema.object({
-  apiKey: Schema.string().required().description("OpenAI API Key: https://platform.openai.com/account/api-keys"),
-  apiAddress: Schema.string().required().default("https://api.openai.com/v1").description("API Запросить адрес."),
+  apiKey: Schema.string().required().description("OpenAI API Key: https://openrouter.ai/keys"),
+  apiAddress: Schema.string().required().default("https://openrouter.ai/api/v1").description("API Запросить адрес."),
   triggerWord: Schema.string().default("chat").description("Ключевые слова, которые вызывают ответ бота."),
-  model: Schema.union(getAvailableModels()).default('gpt-3.5-turbo'),
+  model: Schema.union(['gpt-3.5-turbo', 'google/gemini-pro', 'nousresearch/nous-capybara-7b', 'mistralai/mistral-7b-instruct', 'openchat/openchat-7b', 'rwkv/rwkv-5-world-3b']).default('gpt-3.5-turbo'),
   temperature: Schema.number().default(1).description("Температура, более высокие значения означают, что модель будет подвергаться большему риску. Для более творческих приложений попробуйте 0,9, а для приложений, где есть четкий ответ, попробуйте 0 (выборка argmax)."),
   maxTokens: Schema.number().default(100).description("Максимальное количество сгенерированных токенов."),
   topP: Schema.number().default(1),
@@ -53,12 +53,16 @@ export const Config: Schema<Config> = Schema.object({
     "HTTP-Referer": Schema.string(),
     "X-Title": Schema.string(),
   }).default({
-    "HTTP-Referer": "https://github.com/seoeaa/koishi-plugin-openrouter-chatgpt",
+    "HTTP-Referer": "https://github.com",
     "X-Title": "koishi-plugin",
   }),
 })
 
 export async function apply(ctx: Context, config: Config) {
+
+
+  const models = await getAvailableModels();
+
   const configuration = new Configuration({
     apiKey: config.apiKey,
     basePath: config.apiAddress,
@@ -97,7 +101,10 @@ export async function apply(ctx: Context, config: Config) {
 
       const completion = await openai.createChatCompletion({
         model: config.model,
-        messages: [{ "role": "user", 'content': q }],
+        messages: [
+          {"role": "system", 'content': "Ты полезный помошник поэт."},
+          { "role": "user", 'content': q }
+        ],
         temperature: config.temperature,
         max_tokens: config.maxTokens,
         top_p: config.topP,
