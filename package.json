@@ -1,11 +1,11 @@
 {
   "name": "koishi-plugin-openarouter-chatgpt",
   "author": "seoinetru",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A ChatGPT robot that calls the API Openrouter and supports agents.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seoeaa/koishi-plugin-openrouter-chatgpt"
+    "url": "git+https://github.com/seoeaa/koishi-plugin-openrouter-chatgpt.git"
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
