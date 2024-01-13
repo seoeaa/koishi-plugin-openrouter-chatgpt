@@ -18,6 +18,10 @@ export interface Config {
   errorMessage: string
   triggerWord: string
   pictureMode: boolean
+  defaultHeaders: {
+    "HTTP-Referer": string;
+    "X-Title": string;
+  }
 }
 
 async function getAvailableModels() {
@@ -45,8 +49,13 @@ export const Config: Schema<Config> = Schema.object({
   stop: Schema.array(Schema.string()).default(null).description('Сгенерированный текст остановится при обнаружении любого маркера остановки.'),
   errorMessage: Schema.string().default("В ответе ошибка, свяжитесь с администратором.。").description("Подсказка при ответе на ошибку."),
   pictureMode: Schema.boolean().default(false).description("Включите режим изображения."),
-  defaultHeaders: {"HTTP-Referer": "https://github.com/seoeaa/koishi-plugin-openrouter-chatgpt",  "X-Title": "koishi-plugin",
-  },
+  defaultHeaders: Schema.object({
+    "HTTP-Referer": Schema.string(),
+    "X-Title": Schema.string(),
+  }).default({
+    "HTTP-Referer": "https://github.com/seoeaa/koishi-plugin-openrouter-chatgpt",
+    "X-Title": "koishi-plugin",
+  }),
 })
 
 export async function apply(ctx: Context, config: Config) {
