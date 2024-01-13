@@ -3,7 +3,7 @@ import { Configuration, OpenAIApi } from 'openai';
 import {} from 'koishi-plugin-puppeteer'
 import axios from 'axios';
 
-export const name = 'openai-chatgpt'
+export const name = 'openrouter-chatgpt'
 
 export interface Config {
   apiKey: string
